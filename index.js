@@ -66,9 +66,9 @@ var Omegle = function () {
 			}
 		});
 	};
-	this.connect = function (topics = false, spyMode = false) {
+	this.connect = function (topics = false, unmon = true, spyMode = false) {
 		this.updateServer();
-		if (spyMode == true) spyMode = 1;
+		if (spyMode && !unmon) spyMode = 1; // spy mode doesn't exist in unmonitored
 		var data = {
 			rcs: 1,
 			firstevents: 1,
@@ -76,6 +76,7 @@ var Omegle = function () {
 			randid: randID(),
 			spid: '',
 			wantsspy: spyMode,
+			group: unmon ? 'unmon' : '',
 			//required parameter to received the recaptchaRequired event
 			caps: 'recaptcha2' 
 		};
